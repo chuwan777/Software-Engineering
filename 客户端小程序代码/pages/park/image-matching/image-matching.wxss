@@ -1,0 +1,360 @@
+/* pages/park/image-matching/image-matching.wxss */
+/* 复用基础样式 */
+.page-container {
+  min-height: 100vh;
+  background-color: #f8f5e6;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.decor-top, .decor-bottom {
+  height: 30rpx;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23d4b68c" fill-opacity="0.3" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.decor-bottom { transform: rotate(180deg); }
+
+.main-container {
+  max-width: 700rpx;
+  margin: 0 auto;
+  padding: 40rpx 20rpx;
+}
+
+.title-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60rpx 0 80rpx;
+}
+.title-decoration {
+  width: 80rpx;
+  height: 2rpx;
+  background-color: #a07855;
+}
+.title-decoration.left { margin-right: 20rpx; }
+.title-decoration.right { margin-left: 20rpx; }
+.game-title {
+  font-size: 40rpx;
+  color: #8c6239;
+  font-weight: 500;
+  letter-spacing: 4rpx;
+}
+
+/* 游戏信息区 */
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(212, 182, 140, 0.2);
+  border-radius: 15rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(140, 98, 57, 0.1);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 24rpx;
+  color: #8c6239;
+  margin-bottom: 5rpx;
+}
+
+.info-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #5d4037;
+}
+
+/* 游戏样式 */
+.loading {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #8c6239;
+  font-size: 32rpx;
+}
+
+.list-container {
+  width: 48%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.list-container.left { margin-right: 4%; }
+
+.list-title {
+  display: block;
+  text-align: center;
+  font-size: 32rpx;
+  color: #8c6239;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+  font-size: 28rpx;
+  color: #6b4c2f;
+  box-shadow: 0 4rpx 10rpx rgba(160, 120, 85, 0.1);
+  cursor: pointer;
+}
+
+.item.selected {
+  border: 2rpx solid #a07855;
+  background-color: rgba(160, 120, 85, 0.05);
+}
+
+.poem-content {
+  font-size: 28rpx;
+  color: #5d4037;
+  text-align: center;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.poem-author {
+  font-size: 20rpx;
+  color: #8c6239;
+  text-align: center;
+  display: block;
+}
+
+.image-meaning {
+  font-size: 28rpx;
+  color: #5d4037;
+  text-align: center;
+  display: block;
+  margin-bottom: 10rpx;
+  font-weight: bold;
+}
+
+.image-description {
+  font-size: 20rpx;
+  color: #8c6239;
+  text-align: center;
+  display: block;
+  line-height: 1.4;
+}
+
+.pairs-container {
+  margin: 40rpx 0;
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 16rpx;
+}
+
+.pairs-title {
+  display: block;
+  font-size: 30rpx;
+  color: #8c6239;
+  margin-bottom: 15rpx;
+  font-weight: 500;
+}
+
+.pair-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  border-bottom: 1rpx dashed #d4b68c;
+  font-size: 26rpx;
+}
+
+.pair-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.pair-poem,
+.pair-image {
+  flex: 1;
+  text-align: center;
+}
+
+.pair-poem text:first-child,
+.pair-image text:first-child {
+  display: block;
+  font-size: 26rpx;
+  color: #5d4037;
+  margin-bottom: 5rpx;
+}
+
+.pair-author,
+.pair-description {
+  font-size: 20rpx;
+  color: #8c6239;
+  display: block;
+}
+
+.pair-item .link { flex: 1; text-align: center; color: #a07855; font-size: 32rpx; font-weight: bold; }
+
+.pair-result {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.pair-result.correct {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.pair-result.wrong {
+  background-color: #f44336;
+  color: #fff;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+  margin-top: 30rpx;
+}
+
+.submit-btn {
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #a07855;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  padding: 0;
+  margin: 20rpx auto;
+  display: block;
+}
+
+.hint-btn {
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #d4b68c;
+  color: #8c6239;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  padding: 0;
+  margin: 20rpx auto;
+  display: block;
+  box-shadow: 0 4rpx 10rpx rgba(140, 98, 57, 0.2);
+  transition: all 0.3s ease;
+}
+
+.result-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  margin: 40rpx 0;
+  text-align: center;
+  box-shadow: 0 8rpx 20rpx rgba(160, 120, 85, 0.15);
+}
+
+.result-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #8c6239;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.result-card text {
+  font-size: 32rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.correct-result { color: #4cae4c; }
+.wrong-result { color: #d9534f; }
+
+.result-details {
+  display: flex;
+  justify-content: center;
+  gap: 50rpx;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background-color: rgba(212, 182, 140, 0.1);
+  border-radius: 15rpx;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-label {
+  font-size: 24rpx;
+  color: #8c6239;
+  margin-bottom: 5rpx;
+}
+
+.detail-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #5d4037;
+}
+
+.result-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+}
+
+.restart-btn,
+.next-btn {
+  border: none;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+  padding: 0;
+  width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 20rpx auto;
+}
+
+.restart-btn {
+  background-color: transparent;
+  color: #8c6239;
+  border: 2rpx solid #8c6239;
+}
+
+.next-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* 补充状态样式 */
+.item.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* 禁止点击 */
+  background-color: #f5f5f5;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.remove {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.remove:active {
+  transform: scale(1.2);
+}

@@ -1,0 +1,126 @@
+<!--pages/park/image-matching/image-matching.wxml-->
+<view class="page-container">
+  <view class="decor-top"></view>
+  <view class="main-container">
+    <view class="title-box">
+      <view class="title-decoration left"></view>
+      <text class="game-title">意象配对</text>
+      <view class="title-decoration right"></view>
+    </view>
+
+    <!-- 游戏信息区 -->
+    <view class="game-info">
+      <view class="info-item">
+        <text class="info-label">得分:</text>
+        <text class="info-value">{{score}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">用时:</text>
+        <text class="info-value">{{usedTime}}秒</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">回合:</text>
+        <text class="info-value">{{round}}/{{gameConfig.maxRounds}}</text>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{isLoading}}">加载中...</view>
+
+    <!-- 游戏区域 -->
+    <view wx:if="{{!loading && !result}}" class="fade-in">
+      <!-- 诗句列表 -->
+      <view class="list-container left slide-left">
+        <text class="list-title">诗句</text>
+        <view 
+          class="item {{selected.length > 0 && selectedPoemIndex === index ? 'selected bounce' : ''}}" 
+          wx:for="{{poems}}" 
+          wx:key="index" 
+          data-type="poem" 
+          data-index="{{index}}"
+          bindtap="selectItem">
+          <text class="poem-content">{{item.content}}</text>
+          <text class="poem-author">{{currentQuestion.author}}《{{currentQuestion.title}}》</text>
+        </view>
+      </view>
+
+      <!-- 意象列表 -->
+      <view class="list-container right slide-right">
+        <text class="list-title">意象含义</text>
+        <view 
+          class="item {{selected.length > 0 && selectedImageIndex === index ? 'selected bounce' : ''}}" 
+          wx:for="{{images}}" 
+          wx:key="index"
+          data-type="meaning" 
+          data-index="{{index}}"
+          bindtap="selectItem">
+          <text class="image-meaning">{{item.content}}</text>
+        </view>
+      </view>
+
+      <!-- 已选配对 -->
+      <view class="pairs-container slide-up" wx:if="{{pairs.length > 0}}">
+        <text class="pairs-title">已配对 ({{pairs.length}}/{{poems.length}})</text>
+        <view class="pair-item {{item.isCorrect ? 'highlight' : 'shake'}}" wx:for="{{pairs}}" wx:key="index">
+          <view class="pair-content">
+            <view class="pair-poem">
+              <text>{{item.poem}}</text>
+              <text class="pair-author">{{item.author}}《{{item.title}}》</text>
+            </view>
+            <text class="link">→</text>
+            <view class="pair-image">
+              <text>{{item.image}}</text>
+              <text class="pair-description">{{item.description}}</text>
+            </view>
+          </view>
+          <view class="pair-result {{item.isCorrect ? 'correct' : 'wrong'}}">
+            {{item.isCorrect ? '✓' : '✗'}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-buttons fade-in">
+        <button 
+          class="submit-btn" 
+          bindtap="submitAnswer"
+          disabled="{{pairs.length !== poems.length}}"
+          style="{{pairs.length !== poems.length ? 'opacity: 0.6;' : ''}}">
+          提交配对
+        </button>
+        <button 
+          class="hint-btn heartbeat" 
+          bindtap="showHint">
+          提示
+        </button>
+      </view>
+    </view>
+
+
+    <!-- 结果区域 -->
+    <view class="result-card scale-in" wx:if="{{result}}">
+      <text class="result-title">配对结果</text>
+      <text class="correct-result bounce" wx:if="{{result.isAllCorrect}}">
+        恭喜，全部配对正确！
+      </text>
+      <text class="wrong-result" wx:else>
+        配对结果：正确{{result.correctCount}}道，错误{{result.totalCount - result.correctCount}}道
+      </text>
+      <view class="result-details">
+        <view class="detail-item">
+          <text class="detail-label">总得分:</text>
+          <text class="detail-value">{{result.score}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">用时:</text>
+          <text class="detail-value">{{result.timeElapsed}}秒</text>
+        </view>
+      </view>
+      <view class="result-buttons">
+        <button class="next-btn" wx:if="{{round < gameConfig.maxRounds}}" bindtap="nextRound">下一回合</button>
+        <button class="restart-btn" bindtap="restartGame">重新开始</button>
+      </view>
+    </view>
+  </view>
+  <view class="decor-bottom"></view>
+</view>

@@ -1,0 +1,42 @@
+<!--pages/park/index.wxml-->
+<!-- pages/park/index/index.wxml -->
+<view class="page-container">
+  <!-- 顶部装饰（复用现有样式） -->
+  <view class="decor-top"></view>
+
+  <view class="main-container">
+    <!-- 标题区域 -->
+    <view class="title-box">
+      <view class="title-decoration left"></view>
+      <text class="game-title">诗词乐园</text>
+      <view class="title-decoration right"></view>
+    </view>
+
+    <!-- 模块导航卡片 -->
+    <view class="modules-grid">
+      <!-- 诗词填空 -->
+      <view class="module-card" bindtap="navigateTo" data-page="fill-blank">
+        <view class="module-icon">✏️</view>
+        <text class="module-name">诗词填空</text>
+        <text class="module-desc">补全经典诗句，考验记忆与积累</text>
+      </view>
+
+      <!-- 意象配对 -->
+      <view class="module-card" bindtap="navigateTo" data-page="image-matching">
+        <view class="module-icon">🔗</view>
+        <text class="module-name">意象配对</text>
+        <text class="module-desc">连接诗句与对应的意象，理解诗词意境</text>
+      </view>
+
+      <!-- 连字成诗 -->
+      <view class="module-card" bindtap="navigateTo" data-page="connect-words">
+        <view class="module-icon">🧩</view>
+        <text class="module-name">连字成诗</text>
+        <text class="module-desc">将打乱的字重新排列，组成完整诗句</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="decor-bottom"></view>
+</view>

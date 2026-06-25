@@ -1,0 +1,257 @@
+/* pages/login/login.wxss */
+/* pages/login/login.wxss */
+page {
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.login-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bg-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* 背景图占位符 */
+.bg-placeholder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f7e7c5 0%, #dfb251 100%);
+  opacity: 0.3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 85%;
+  max-width: 600rpx;
+  margin: 15% auto;
+  padding: 50rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+.logo {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #8c6239;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.tab-bar {
+  display: flex;
+  margin-bottom: 40rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.tab-item.active {
+  color: #d4a066;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  background-color: #d4a066;
+  border-radius: 3rpx;
+}
+
+/* 微信登录样式 */
+.wechat-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 5rpx solid #f0e6d2;
+  margin-bottom: 20rpx;
+}
+
+.nickname {
+  font-size: 30rpx;
+  color: #333;
+}
+
+/* 账号登录样式 */
+.account-login {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 25rpx 0;
+}
+
+.input-item .icon {
+  font-size: 30rpx;
+  color: #d4a066;
+  margin-right: 20rpx;
+  width: 30rpx;
+  text-align: center;
+}
+
+.input-item input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.verify-code {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 25rpx 0;
+}
+
+.verify-code input {
+  flex: 2;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.get-code-btn {
+  flex: 1;
+  background-color: transparent;
+  color: #d4a066;
+  font-size: 26rpx;
+  padding: 0;
+  height: auto;
+  line-height: normal;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+  font-size: 26rpx;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.remember-me checkbox {
+  transform: scale(0.7);
+  margin-right: 10rpx;
+}
+
+.forgot-password {
+  color: #d4a066;
+}
+
+/* 按钮样式 */
+.login-btn {
+  background-color: #d4a066;
+  color: #fff;
+  border-radius: 80rpx;
+  font-size: 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-bottom: 30rpx;
+}
+
+.login-btn .icon {
+  margin-right: 15rpx;
+}
+
+.register-area {
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.register-btn {
+  color: #d4a066;
+  margin-left: 15rpx;
+}
+
+/* 底部协议 */
+.agreement {
+  position: absolute;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+.agreement navigator {
+  color: #d4a066;
+  text-decoration: underline;
+}
+
+.tip {
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}

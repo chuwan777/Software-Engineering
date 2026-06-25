@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "username": "testuser",
+      "password": "testpassword",
+      "nickname": "testuser",
+      "avatar": "/avatars/1-1766982782786.jpg",
+      "createdAt": "2025-11-29T09:41:58.560Z"
+    },
+    {
+      "id": 2,
+      "username": "user09355877",
+      "password": "testpassword",
+      "nickname": "user09355877",
+      "avatar": "",
+      "createdAt": "2025-11-29T09:42:35.906Z"
+    },
+    {
+      "id": 3,
+      "username": "admin2",
+      "password": "123456",
+      "nickname": "admin2",
+      "avatar": "",
+      "createdAt": "2025-11-29T09:51:47.731Z"
+    },
+    {
+      "id": 4,
+      "username": "admin",
+      "password": "123456",
+      "nickname": "admin",
+      "avatar": "/avatars/4-1766991520934.jpg",
+      "createdAt": "2025-11-29T10:40:27.283Z"
+    }
+  ]
+}

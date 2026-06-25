@@ -1,0 +1,118 @@
+<!-- help-feedback.wxml -->
+<view class="help-feedback-container">
+  <!-- 常见问题 -->
+  <view class="section">
+    <view class="section-title">常见问题</view>
+    <view class="section-content">
+      <view class="faq-list">
+        <block wx:for="{{faqs}}" wx:key="id">
+          <view class="faq-item">
+            <view class="faq-question" bindtap="toggleFaq" data-id="{{item.id}}">
+              <text class="faq-question-text">{{item.question}}</text>
+              <text class="faq-toggle-icon">{{item.expanded ? '▼' : '▶'}}</text>
+            </view>
+            <view 
+              class="faq-answer" 
+              style="display: {{item.expanded ? 'block' : 'none'}}"
+            >
+              {{item.answer}}
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 意见反馈 -->
+  <view class="section">
+    <view class="section-title">意见反馈</view>
+    <view class="section-content">
+      <!-- 反馈类型 -->
+      <view class="feedback-type-container">
+        <text class="feedback-label">反馈类型：</text>
+        <view class="feedback-type-options">
+          <view 
+            wx:for="{{feedbackTypes}}" 
+            wx:key="index"
+            class="feedback-type-item {{selectedFeedbackType === item ? 'selected' : ''}}"
+            bindtap="selectFeedbackType"
+            data-type="{{item}}"
+          >
+            {{item}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 反馈内容 -->
+      <view class="feedback-content-container">
+        <text class="feedback-label">反馈内容：</text>
+        <textarea 
+          class="feedback-content" 
+          placeholder="请详细描述您的问题或建议..." 
+          value="{{feedbackContent}}" 
+          bindinput="inputFeedbackContent"
+        ></textarea>
+      </view>
+
+      <!-- 联系方式 -->
+      <view class="contact-info-container">
+        <text class="feedback-label">联系方式：</text>
+        <input 
+          class="contact-info" 
+          placeholder="请留下您的联系方式（可选）" 
+          value="{{contactInfo}}" 
+          bindinput="inputContactInfo"
+        ></input>
+      </view>
+
+      <!-- 图片上传 -->
+      <view class="image-upload-container">
+        <text class="feedback-label">图片上传：</text>
+        <view class="image-list">
+          <block wx:for="{{images}}" wx:key="index">
+            <view class="image-item">
+              <image src="{{item}}" mode="aspectFill"></image>
+              <view class="image-delete" bindtap="deleteImage" data-index="{{index}}">×</view>
+            </view>
+          </block>
+          <view 
+            class="image-add" 
+            bindtap="chooseImage" 
+            wx:if="{{images.length < 3}}"
+          >
+            +
+          </view>
+        </view>
+      </view>
+
+      <!-- 提交按钮 -->
+      <button 
+        class="submit-btn" 
+        bindtap="submitFeedback"
+      >
+        提交反馈
+      </button>
+    </view>
+  </view>
+
+  <!-- 其他帮助 -->
+  <view class="section">
+    <view class="section-title">其他帮助</view>
+    <view class="section-content">
+      <view class="help-options">
+        <button 
+          class="help-option-btn" 
+          bindtap="contactCustomerService"
+        >
+          联系客服
+        </button>
+        <button 
+          class="help-option-btn" 
+          bindtap="aboutUs"
+        >
+          关于我们
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,23 @@
+{
+  "name": "666",
+  "gender": [
+    {
+      "name": "小男孩",
+      "value": "0",
+      "checked": true
+    }
+  ],
+  "skills": [
+    {
+      "name": "唐诗",
+      "value": "tang",
+      "checked": true
+    },
+    {
+      "name": "宋词",
+      "value": "song",
+      "checked": true
+    }
+  ],
+  "opinion": ""
+}

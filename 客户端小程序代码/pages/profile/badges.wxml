@@ -1,0 +1,52 @@
+<!-- 徽章详情页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{ isLoading }}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 徽章列表 -->
+  <view class="badges-container" wx:if="{{ !isLoading }}">
+    <view class="section-header">
+      <text class="section-title">我的徽章</text>
+      <text class="section-count">{{ badges.length }} 个徽章</text>
+    </view>
+    
+    <view class="badges-grid">
+      <view class="badge-item" wx:for="{{ badges }}" wx:key="index" bindtap="showBadgeDetail" data-index="{{index}}">
+        <view class="badge-icon">{{ item.icon || '🏆' }}</view>
+        <view class="badge-info">
+          <text class="badge-name">{{ item.name || item }}</text>
+          <text class="badge-date">获得日期: {{ item.date || '2023-01-01' }}</text>
+        </view>
+        <view class="badge-overlay">查看详情</view>
+      </view>
+      
+      <view class="empty-state" wx:if="{{ badges.length === 0 }}">
+        <text>暂无徽章</text>
+        <text class="empty-tip">继续学习解锁更多徽章</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 徽章详情模态框 -->
+  <view wx:if="{{showBadgeModal}}" class="modal-overlay">
+    <view class="modal-content badge-modal">
+      <view class="modal-header">
+        <text class="modal-title">徽章详情</text>
+        <view class="modal-close" bindtap="closeBadgeModal">×</view>
+      </view>
+      <view class="badge-detail">
+        <text class="badge-detail-icon">{{currentBadge.icon || '🏆'}}</text>
+        <text class="badge-detail-name">{{currentBadge.name || currentBadge}}</text>
+        <text class="badge-detail-description">{{currentBadge.details || ''}}</text>
+        <view class="badge-condition">
+          <text class="condition-title">获取条件：</text>
+          <text class="condition-content">{{currentBadge.conditions || '完成相关学习任务'}}</text>
+        </view>
+        <text class="badge-date">获得日期：{{currentBadge.date || '2023-01-01'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

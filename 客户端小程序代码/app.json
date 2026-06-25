@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/learn/learn",
+    "pages/profile/profile",
+    "pages/profile/study-progress",
+    "pages/profile/badges",
+    "pages/profile/poems",
+    "pages/profile/recordings",
+    "pages/profile/recording-detail",
+    "pages/profile/poem-edit",
+    "pages/profile/poem-detail",
+    "pages/profile/settings",
+    "pages/profile/reminder",
+    "pages/profile/parent-center",
+    "pages/profile/help-feedback",
+    "pages/poem-detail/poem-detail",
+    "pages/park/index/index",
+    "pages/park/connect-words/connect-words",
+    "pages/park/fill-blank/fill-blank",
+    "pages/park/image-matching/image-matching",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/forgot/forgot",
+    "pages/agreement/agreement",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFE8B8",
+    "navigationBarTitleText": "古诗词乐园",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF9E6"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#FF8C00",
+    "backgroundColor": "#FFFDF5",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/主页.png",
+        "selectedIconPath": "images/主页.png"
+      },
+      {
+        "pagePath": "pages/learn/learn",
+        "text": "学习",
+        "iconPath": "images/学习书本.png",
+        "selectedIconPath": "images/学习书本.png"
+      },
+      {
+        "pagePath": "pages/park/index/index",
+        "text": "乐园",
+        "iconPath": "images/游乐园.png",
+        "selectedIconPath": "images/游乐园.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/我的.png",
+        "selectedIconPath": "images/我的.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

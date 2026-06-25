@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "诗词分类",
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f7f5f2"
+}

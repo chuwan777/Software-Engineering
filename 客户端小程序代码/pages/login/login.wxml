@@ -1,0 +1,65 @@
+<!--pages/login/login.wxml-->
+<!-- pages/login/login.wxml -->
+<view class="login-container">
+  <!-- 背景图占位符 -->
+  <view class="bg-placeholder" wx:if="{{!showBgImage}}"></view>
+  <!-- 背景图 -->
+  <image 
+    class="bg-img" 
+    wx:if="{{showBgImage}}"
+    src="/images/login-bg.png" 
+    mode="aspectFill"
+  ></image>
+  
+  <!-- 登录卡片 -->
+  <view class="login-card">
+    <!-- 标题 -->
+    <view class="title">
+      <text class="logo">📜</text>
+      <text class="name">诗词小筑</text>
+    </view>
+    
+      <!-- 账号密码登录 -->
+    <view class="account-login">
+      <view class="input-group">
+        <view class="input-item">
+          <text class="icon">👤</text>
+          <input type="text" placeholder="请输入账号" bindinput="handleInput" data-key="username" value="{{username}}"/>
+        </view>
+        <view class="input-item">
+          <text class="icon">🔒</text>
+          <input type="password" placeholder="请输入密码" bindinput="handleInput" data-key="password" value="{{password}}"/>
+        </view>
+      </view>
+      
+      <!-- 记住密码 -->
+      <view class="remember-password">
+        <view class="checkbox-container" bindtap="toggleRememberPassword">
+          <view class="checkbox {{rememberMe ? 'checked' : ''}}">
+            <text class="checkmark" wx:if="{{rememberMe}}">✓</text>
+          </view>
+          <text class="checkbox-text">记住密码</text>
+        </view>
+      </view>
+
+      <navigator url="/pages/forgot/forgot" class="forgot-password">忘记密码？</navigator>
+      
+      <button class="login-btn" bindtap="handleAccountLogin" disabled="{{isLoading}}">
+        {{isLoading ? '登录中...' : '登录'}}
+      </button>
+      
+      <view class="register-area">
+        <text>还没有账号？</text>
+        <navigator url="/pages/register/register" class="register-btn">立即注册</navigator>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 底部协议 -->
+  <view class="agreement">
+    <text>登录即表示同意</text>
+    <navigator url="/pages/agreement/agreement">《用户服务协议》</navigator>
+    <text>和</text>
+    <navigator url="/pages/privacy/privacy">《隐私政策》</navigator>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "userId": 1,
+      "learnedPoems": [
+        1,
+        2,
+        3
+      ],
+      "masteryRate": 30,
+      "streakDays": 1,
+      "lastLearnDate": "2025-11-29",
+      "totalPoems": 10
+    },
+    {
+      "userId": 4,
+      "learnedPoems": [
+        1,
+        2,
+        3
+      ],
+      "masteryRate": 30,
+      "streakDays": 1,
+      "lastLearnDate": "2025-12-29",
+      "totalPoems": 10
+    }
+  ]
+}

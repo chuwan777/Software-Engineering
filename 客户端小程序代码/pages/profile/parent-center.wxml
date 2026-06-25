@@ -1,0 +1,98 @@
+<!-- parent-center.wxml -->
+<view class="parent-center-container">
+  <!-- 学习统计卡片 -->
+  <view class="stats-cards">
+    <view class="stat-card">
+      <view class="stat-value">{{studyStats.learnedPoems}}/{{studyStats.totalPoems}}</view>
+      <view class="stat-label">已学习古诗</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{studyStats.masteredPoems}}</view>
+      <view class="stat-label">已掌握古诗</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{studyStats.avgDailyTime}}</view>
+      <view class="stat-label">日均学习时间</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{studyStats.streakDays}}</view>
+      <view class="stat-label">连续学习天数</view>
+    </view>
+  </view>
+
+  <!-- 每日学习目标 -->
+  <view class="section">
+    <view class="section-title">每日学习目标</view>
+    <view class="section-content">
+      <view class="goal-container">
+        <text class="goal-label">每天学习古诗数量：</text>
+        <picker 
+          mode="selector" 
+          range="[1,2,3,4,5]" 
+          value="{{dailyGoal - 1}}" 
+          bindchange="setDailyGoal"
+        >
+          <view class="goal-value">{{dailyGoal}} 首</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习报告 -->
+  <view class="section">
+    <view class="section-title">学习报告</view>
+    <view class="section-content">
+      <view class="report-type-container">
+        <view 
+          wx:for="{{reportTypes}}" 
+          wx:key="index"
+          class="report-type-item {{selectedReportType === item ? 'selected' : ''}}"
+          bindtap="selectReportType"
+          data-type="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+      <button 
+        class="view-report-btn" 
+        bindtap="viewStudyReport"
+      >
+        查看学习报告
+      </button>
+    </view>
+  </view>
+
+  <!-- 最近学习记录 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">最近学习记录</view>
+      <view class="view-more" bindtap="viewStudyRecords">查看更多</view>
+    </view>
+    <view class="section-content">
+      <view class="record-list">
+        <block wx:for="{{recentStudyRecords}}" wx:key="index">
+          <view class="record-item">
+            <view class="record-date">{{item.date}}</view>
+            <view class="record-time">{{item.time}}</view>
+            <view class="record-content">{{item.content}}</view>
+            <view class="record-status">{{item.status}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习设置 -->
+  <view class="section">
+    <view class="section-title">学习设置</view>
+    <view class="section-content">
+      <button 
+        class="setting-btn" 
+        bindtap="setStudyLimit"
+        plain
+      >
+        设置学习时间限制
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,174 @@
+/* reminder.wxss */
+.reminder-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+/* 通用section样式 */
+.reminder-section {
+  background-color: white;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.section-content {
+}
+
+/* 提醒开关 */
+.toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-label {
+  font-size: 32rpx;
+  color: #333;
+}
+
+/* 提醒时间 */
+.time-picker {
+  width: 100%;
+}
+
+.picker-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.picker-content:last-child {
+  border-bottom: none;
+}
+
+.picker-label {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.picker-value {
+  font-size: 32rpx;
+  color: #007aff;
+}
+
+/* 提醒频率 */
+.frequency-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.frequency-item {
+  padding: 15rpx 30rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #ddd;
+  font-size: 28rpx;
+  color: #666;
+  background-color: white;
+}
+
+.frequency-item.selected {
+  background-color: #007aff;
+  color: white;
+  border-color: #007aff;
+}
+
+/* 提醒内容 */
+.content-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-bottom: 30rpx;
+}
+
+.content-option {
+  padding: 20rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: #333;
+  background-color: white;
+}
+
+.content-option.selected {
+  border-color: #007aff;
+  background-color: rgba(0, 122, 255, 0.05);
+}
+
+/* 自定义提醒内容 */
+.custom-content {
+}
+
+.custom-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.custom-input-container {
+  display: flex;
+  gap: 20rpx;
+}
+
+.custom-input {
+  flex: 1;
+  padding: 20rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+}
+
+.save-btn {
+  padding: 0 30rpx;
+  background-color: #007aff;
+  color: white;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+}
+
+.save-btn::after {
+  border: none;
+}
+
+.save-btn[disabled] {
+  background-color: #ccc;
+}
+
+/* 预览 */
+.reminder-preview {
+  background-color: #e8f4fd;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+}
+
+.preview-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #007aff;
+  margin-bottom: 20rpx;
+}
+
+.preview-content {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.preview-frequency {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #666;
+}

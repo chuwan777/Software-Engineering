@@ -1,0 +1,101 @@
+/* pages/park/index.wxss */
+/* 复用现有装饰、标题样式，新增卡片样式 */
+.page-container {
+  min-height: 100vh;
+  background-color: #f8f5e6;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 复用装饰元素 */
+.decor-top, .decor-bottom {
+  height: 30rpx;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23d4b68c" fill-opacity="0.3" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.decor-bottom { transform: rotate(180deg); }
+
+.main-container {
+  max-width: 700rpx;
+  margin: 0 auto;
+  padding: 40rpx 20rpx;
+}
+
+/* 复用用标题样式 */
+.title-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60rpx 0 80rpx;
+}
+.title-decoration {
+  width: 80rpx;
+  height: 2rpx;
+  background-color: #a07855;
+}
+.title-decoration.left { margin-right: 20rpx; }
+.title-decoration.right { margin-left: 20rpx; }
+.game-title {
+  font-size: 40rpx;
+  color: #8c6239;
+  font-weight: 500;
+  letter-spacing: 4rpx;
+}
+
+/* 模块卡片样式 */
+.modules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30rpx;
+}
+
+.module-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 20rpx rgba(160, 120, 85, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.module-card:active { transform: scale(0.98); }
+
+.module-icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+  color: #a07855;
+}
+
+.module-name {
+  font-size: 32rpx;
+  color: #6b4c2f;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.module-desc {
+  font-size: 24rpx;
+  color: #8c6239;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+.music-control {
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 10rpx rgba(160, 120, 85, 0.2);
+  z-index: 10;
+  font-size: 30rpx;
+  color: #8c6239;
+  cursor: pointer;
+}

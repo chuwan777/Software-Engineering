@@ -1,0 +1,56 @@
+<!--pages/register/register.wxml-->
+<view class="register-container">
+  <!-- 背景图占位符 -->
+  <view class="bg-placeholder" wx:if="{{!showBgImage}}"></view>
+  <!-- 背景图 -->
+  <image 
+    class="bg-img" 
+    wx:if="{{showBgImage}}"
+    src="/images/login-bg.png" 
+    mode="aspectFill"
+  ></image>
+  
+  <!-- 注册卡片 -->
+  <view class="register-card">
+    <!-- 标题 -->
+    <view class="title">
+      <text class="logo">📜</text>
+      <text class="name">诗词小筑</text>
+    </view>
+    
+    <!-- 账号注册 -->
+    <view class="account-register">
+      <view class="input-group">
+        <view class="input-item">
+          <text class="icon">👤</text>
+          <input type="text" placeholder="请输入用户名" bindinput="handleInput" data-key="username" value="{{username}}"/>
+        </view>
+        <view class="input-item">
+          <text class="icon">🔒</text>
+          <input type="password" placeholder="请输入密码（6-20位）" bindinput="handleInput" data-key="password" value="{{password}}"/>
+        </view>
+        <view class="input-item">
+          <text class="icon">🔒</text>
+          <input type="password" placeholder="请再次输入密码" bindinput="handleInput" data-key="confirmPassword" value="{{confirmPassword}}"/>
+        </view>
+      </view>
+      
+      <button class="register-btn" bindtap="handleRegister" disabled="{{isLoading}}">
+        {{isLoading ? '注册中...' : '立即注册'}}
+      </button>
+      
+      <view class="login-area">
+        <text>已有账号？</text>
+        <navigator url="/pages/login/login" class="login-btn">立即登录</navigator>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 底部协议 -->
+  <view class="agreement">
+    <text>注册即表示同意</text>
+    <navigator url="/pages/agreement/agreement">《用户服务协议》</navigator>
+    <text>和</text>
+    <navigator url="/pages/privacy/privacy">《隐私政策》</navigator>
+  </view>
+</view>

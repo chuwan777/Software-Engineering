@@ -1,0 +1,190 @@
+<!-- 我的页面 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{ isLoading }}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 用户信息区域 -->
+  <view class="user-info" style="height: 226rpx; box-sizing: border-box; left: 0rpx; top: 0rpx; width: 750rpx">
+    <view class="user-avatar">
+      <view class="avatar-placeholder" wx:if="{{!showAvatar}}">
+        <text class="placeholder-icon">👤</text>
+      </view>
+      <image 
+        wx:if="{{showAvatar}}" 
+        src="{{ userInfo.avatar || '/images/avatar.png' }}" 
+        mode="aspectFill" 
+        class="avatar-image"
+      ></image>
+    </view>
+    <view class="user-text-info">
+      <view class="user-name">{{ userInfo.name }}</view>
+      <view class="user-level">{{ userInfo.level }}</view>
+    </view>
+  </view>
+  
+  <!-- 我的诗库 - 仅登录用户可见 -->
+  <view wx:if="{{isLogin}}">
+    <view class="section-title">我的诗库</view>
+    <view class="card-grid">
+      <!-- 学习进度 -->
+      <view class="card study-progress" bindtap="navigateToStudyProgress">
+        <view class="card-icon">
+          <text class="icon">📚</text>
+        </view>
+        <view class="section-header">
+          <view class="card-title">学习进度</view>
+          <view class="section-more" bindtap="showGoalModal">设置目标</view>
+        </view>
+        <view class="progress-content">
+          <view class="progress-item">
+            <text class="progress-value">{{studyProgress.learned || 0}}</text>
+            <text class="progress-label">首已学</text>
+          </view>
+          <view class="progress-item">
+            <text class="progress-value">{{studyProgress.streakDays || 0}}</text>
+            <text class="progress-label">天学习</text>
+          </view>
+          <view class="progress-item">
+            <text class="progress-value">{{studyProgress.poemsRecited || 0}}</text>
+            <text class="progress-label">首背诵</text>
+          </view>
+          <view class="progress-item">
+            <text class="progress-value">{{studyProgress.percentage || 0}}%</text>
+            <text class="progress-label">完成度</text>
+          </view>
+        </view>
+        <view class="goal-info">
+          <text class="goal-label">今日目标：</text>
+          <text class="goal-value">{{studyProgress.dailyGoal || 1}}首</text>
+          <text class="goal-status">{{studyProgress.goalCompleted ? '✓ 已完成' : ''}}</text>
+          <view class="progress-bar goal-progress">
+            <view class="progress-value" style="width: {{ (studyProgress.completionRate || 0) + '%' }}"></view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 学习目标设置模态框 -->
+      <view wx:if="{{showGoalModal}}" class="modal-overlay">
+        <view class="modal-content">
+          <view class="modal-header">
+            <text class="modal-title">设置每日学习目标</text>
+            <view class="modal-close" bindtap="closeGoalModal">×</view>
+          </view>
+          <form bindsubmit="setDailyGoal" class="modal-form">
+            <view class="form-item">
+              <text class="form-label">每日学习诗歌数量：</text>
+              <input type="number" name="goal" value="{{studyProgress.dailyGoal}}" placeholder="请输入1-10之间的数字" min="1" max="10" class="form-input" />
+            </view>
+            <view class="form-tip">建议每天学习1-3首诗歌，循序渐进</view>
+            <button form-type="submit" class="submit-btn">保存设置</button>
+          </form>
+        </view>
+      </view>
+      
+      <!-- 我的徽章 -->
+      <view class="card my-badges" bindtap="navigateToBadges">
+        <view class="card-icon">
+          <text class="icon">🏆</text>
+        </view>
+        <view class="section-header">
+          <view class="card-title">我的徽章</view>
+          <text class="section-more">共 {{badges.count}} 个</text>
+        </view>
+        <view class="badges-container">
+          <view class="badge" wx:for="{{ badges.list }}" wx:key="index" bindtap="showBadgeDetail" data-index="{{index}}" data-name="{{item.name}}">
+            {{ item.icon || '🏆' }}
+            <view class="badge-overlay">查看详情</view>
+          </view>
+          <view wx:if="{{badges.list.length === 0}}" class="empty-state">
+            <text>暂无徽章</text>
+            <text class="empty-tip">继续学习解锁更多徽章</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 徽章详情模态框 -->
+      <view wx:if="{{showBadgeModal}}" class="modal-overlay">
+        <view class="modal-content badge-modal">
+          <view class="modal-header">
+            <text class="modal-title">徽章详情</text>
+            <view class="modal-close" bindtap="closeBadgeModal">×</view>
+          </view>
+          <view class="badge-detail">
+            <text class="badge-detail-icon">{{currentBadge.icon || '🏆'}}</text>
+            <text class="badge-detail-name">{{currentBadge.name || currentBadge}}</text>
+            <text class="badge-detail-description">{{currentBadge.details || ''}}</text>
+            <view class="badge-condition">
+              <text class="condition-title">获取条件：</text>
+              <text class="condition-content">{{currentBadge.conditions || '完成相关学习任务'}}</text>
+            </view>
+            <text class="badge-date">获得日期：{{currentBadge.date || '2023-01-01'}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 我的收藏 -->
+      <view class="card my-collection" bindtap="navigateToCollection">
+        <view class="card-icon">
+          <text class="icon">❤️</text>
+        </view>
+        <view class="card-title">我的收藏</view>
+        <view class="card-desc">我喜欢的古诗</view>
+        <view class="collection-count">{{ collection.count }} 首</view>
+      </view>
+      
+      <!-- 录音作品 -->
+      <view class="card my-recordings" bindtap="navigateToRecordings">
+        <view class="card-icon">
+          <text class="icon">🎤</text>
+        </view>
+        <view class="card-title">录音作品</view>
+        <view class="card-desc">我的古诗朗诵</view>
+        <view class="recordings-list">
+          <view class="recording-item" wx:for="{{ recordings }}" wx:key="index">
+            <text class="icon">▶️</text> {{ item.name }}
+          </view>
+          <view class="empty-state" wx:if="{{ recordings.length === 0 }}">
+            <text>暂无录音作品</text>
+            <text class="empty-tip">开始录制你的第一首古诗吧</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 未登录提示区域 -->
+  <view wx:else class="login-prompt">
+    <text class="prompt-icon">📖</text>
+    <text class="prompt-text">登录后即可查看您的学习数据和诗库</text>
+    <button class="login-button" bindtap="navigateToLogin">立即登录</button>
+  </view>
+  
+  <!-- 其他功能 -->
+  <view class="section-title">其他功能</view>
+  <view class="other-functions">
+    <view class="function-item" bindtap="navigateToSettings">
+      <view class="function-icon">⚙️</view>
+      <view class="function-name">设置</view>
+      <view class="arrow">></view>
+    </view>
+    <view class="function-item" bindtap="navigateToReminder">
+      <view class="function-icon">🔔</view>
+      <view class="function-name">学习提醒</view>
+      <view class="arrow">></view>
+    </view>
+    <view class="function-item" bindtap="navigateToParentCenter">
+      <view class="function-icon">👨‍👩‍👧‍👦</view>
+      <view class="function-name">家长中心</view>
+      <view class="arrow">></view>
+    </view>
+    <view class="function-item" bindtap="navigateToHelp">
+      <view class="function-icon">❓</view>
+      <view class="function-name">帮助与反馈</view>
+      <view class="arrow">></view>
+    </view>
+  </view>
+</view>
+

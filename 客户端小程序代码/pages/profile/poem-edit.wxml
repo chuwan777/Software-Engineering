@@ -1,0 +1,29 @@
+<!-- pages/profile/poem-edit.wxml -->
+<view class="poem-edit-container">
+  <!-- 标题输入 -->
+  <view class="input-group">
+    <text class="label">标题</text>
+    <input type="text" placeholder="请输入诗歌标题" bindinput="onInputChange" data-field="title" value="{{poem.title}}" />
+  </view>
+
+  <!-- 内容输入 -->
+  <view class="input-group">
+    <text class="label">内容</text>
+    <textarea placeholder="请输入诗歌内容" bindinput="onInputChange" data-field="content" value="{{poem.content}}" />
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="input-group">
+    <text class="label">分类</text>
+    <picker bindchange="onCategoryChange" value="{{getCategoryIndex()}}" range="{{categories}}" range-key="name">
+      <view class="picker">
+        {{poem.category || '请选择分类'}}
+      </view>
+    </picker>
+  </view>
+
+  <!-- 保存按钮 -->
+  <button class="save-btn" bindtap="savePoem" disabled="{{isLoading}}">
+    {{isLoading ? '保存中...' : (isEditing ? '保存修改' : '添加作品')}}
+  </button>
+</view>

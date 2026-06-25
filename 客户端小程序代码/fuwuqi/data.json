@@ -1,0 +1,102 @@
+[
+    {
+      "id": 1,
+      "imageUrl": "http://127.0.0.1:3000/deal/d6ca7bcb0a46f21f0cc6e1e8fe246b600d33ae9f.webp",
+      "title": "静夜思",
+      "author": "李白",
+      "rating": "★★☆☆☆",
+      "content": "床前明月光，疑是地上霜。举头望明月，低头思故乡。",
+      "blankPositions": [1, 11],
+      "correctAnswer": "明望"
+    },
+    {
+      "id": 2,
+      "imageUrl": "http://127.0.0.1:3000/deal/242dd42a2834349bd4a12e9bc1ea15ce36d3be0d.webp",
+      "title": "春晓",
+      "author": "孟浩然",
+      "rating": "★☆☆☆☆",
+      "content": "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。",
+      "blankPositions": [3, 15],
+      "correctAnswer": "觉风"
+    },
+    {
+      "id": 3,
+      "imageUrl": "http://127.0.0.1:3000/deal/view.jpg",
+      "title": "望庐山瀑布",
+      "author": "李白",
+      "rating": "★★★☆☆",
+      "content": "日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。",
+      "blankPositions": [7, 25],
+      "correctAnswer": "烟流"
+    },
+    {
+      "id": 4,
+      "imageUrl": "http://127.0.0.1:3000/deal/OIP-C.webp",
+      "title": "元日",
+      "author": "王安石",
+      "rating": "★★☆☆☆",
+      "content": "爆竹声中一岁除，春风送暖入屠苏。千门万户曈曈日，总把新桃换旧符。",
+      "blankPositions": [5, 21],
+      "correctAnswer": "岁曈"
+    },
+    {
+      "id": 5,
+      "imageUrl": "http://127.0.0.1:3000/deal/R-C.jpg",
+      "title": "咏鹅",
+      "author": "骆宾王",
+      "rating": "★☆☆☆☆",
+      "content": "鹅，鹅，鹅，曲项向天歌。白毛浮绿水，红掌拨清波。",
+      "blankPositions": [4, 10],
+      "correctAnswer": "项浮"
+    },
+    {
+      "id": 6,
+      "imageUrl": "http://127.0.0.1:3000/deal/R-C (1).jpg",
+      "title": "江雪",
+      "author": "柳宗元",
+      "rating": "★★★☆☆",
+      "content": "千山鸟飞绝，万径人踪灭。孤舟蓑笠翁，独钓寒江雪。",
+      "blankPositions": [3, 11],
+      "correctAnswer": "鸟蓑"
+    },
+    {
+      "id": 7,
+      "imageUrl": "http://127.0.0.1:3000/deal/OIP-C (1).webp",
+      "title": "登鹳雀楼",
+      "author": "王之涣",
+      "rating": "★★☆☆☆",
+      "content": "白日依山尽，黄河入海流。欲穷千里目，更上一层楼。",
+      "blankPositions": [1, 13],
+      "correctAnswer": "日穷"
+    },
+    {
+      "id": 8,
+      "imageUrl": "http://127.0.0.1:3000/deal/R-C (2).jpg",
+      "title": "相思",
+      "author": "王维",
+      "rating": "★★☆☆☆",
+      "content": "红豆生南国，春来发几枝。愿君多采撷，此物最相思。",
+      "blankPositions": [3, 15],
+      "correctAnswer": "豆采"
+    },
+    {
+      "id": 9,
+      "imageUrl": "http://127.0.0.1:3000/deal/R-C (3).jpg",
+      "title": "小池",
+      "author": "杨万里",
+      "rating": "★★☆☆☆",
+      "content": "泉眼无声惜细流，树阴照水爱晴柔。小荷才露尖尖角，早有蜻蜓立上头。",
+      "blankPositions": [7, 25],
+      "correctAnswer": "惜尖"
+    },
+    {
+      "id": 10,
+      "imageUrl": "http://127.0.0.1:3000/deal/R-C (4).jpg",
+      "title": "村居",
+      "author": "高鼎",
+      "rating": "★★☆☆☆",
+      "content": "草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。",
+      "blankPositions": [3, 19],
+      "correctAnswer": "莺杨"
+    }
+  ]

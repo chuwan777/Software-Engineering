@@ -1,0 +1,105 @@
+<!--pages/park/fill-blank/fill-blank.wxml-->
+<view class="page-container">
+  <view class="decor-top"></view>
+  <view class="main-container">
+    <view class="title-box">
+      <view class="title-decoration left"></view>
+      <text class="game-title">诗词填空</text>
+      <view class="title-decoration right"></view>
+    </view>
+
+    <!-- 新增：难度选择 -->
+    <view class="difficulty-selector">
+      <text class="difficulty-label">难度：</text>
+      <view 
+        class="difficulty-btn {{ difficulty === item ? 'active' : '' }}" 
+        wx:for="{{ difficulties }}" 
+        wx:for-item="item" 
+        wx:for-index="idx" 
+        wx:key="*this"
+        bindtap="changeDifficulty"
+        data-difficulty="{{ item }}"
+      >
+        {{ difficultyLabels[idx] }}
+      </view>
+    </view>
+
+    <!-- 新增：进度显示 -->
+    <view class="progress-section">
+      <view class="progress-info">
+        <text>题目：{{ currentQuestionIndex + 1 }}/{{ totalQuestions }}</text>
+        <text>正确率：{{ accuracy }}%</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{ progressWidth }}%"></view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{isLoading}}">加载中...</view>
+
+    <!-- 游戏区域 -->
+    <view wx:if="{{!isLoading}}">
+      <!-- 题目展示 -->
+      <view class="question-card">
+        <!-- 添加安全检查，确保数据存在 -->
+        <block wx:if="{{currentDifficultyPoems && currentDifficultyPoems[currentQuestionIndex]}}">
+          <!-- 显示诗句内容 -->
+          <text class="poem-content">{{currentDifficultyPoems[currentQuestionIndex].poem}}</text>
+          
+          <!-- 显示填空区域 -->
+          <view class="blanks-container">
+            <view class="blank-item" wx:for="{{currentDifficultyPoems[currentQuestionIndex].blanks}}" wx:key="*this">
+              <text class="blank-label">第{{index+1}}空：</text>
+              <input 
+                type="text" 
+                placeholder="请输入答案" 
+                value="{{userAnswers[index]}}"
+                data-index="{{index}}"
+                bindinput="inputAnswer"
+                disabled="{{isAnswered}}"
+                class="poem-input"
+                maxlength="1"
+                data-test="input-{{index}}"
+              />
+            </view>
+          </view>
+          <text class="hint">{{currentDifficultyPoems[currentQuestionIndex].hint}}</text>
+        </block>
+        <block wx:else>
+          <text class="no-data">题目加载中...</text>
+        </block>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="btn-group">
+        <button 
+          class="submit-btn" 
+          bindtap="submitAnswer" 
+          wx:if="{{!isAnswered}}"
+          disabled="{{hasEmptyAnswer}}" 
+        >
+          提交答案
+        </button>
+        
+        <button 
+          class="next-btn" 
+          bindtap="nextQuestion" 
+          wx:if="{{isAnswered}}"
+        >
+          下一题
+        </button>
+      </view>
+
+      <!-- 结果提示 -->
+      <view class="result-hint" wx:if="{{isAnswered}}">
+        <text wx:if="{{isCorrect}}" class="correct">恭喜，回答正确！</text>
+        <text wx:else class="wrong">答错了，正确答案是：{{currentDifficultyPoems[currentQuestionIndex].blanks}}</text>
+      </view>
+    </view>
+
+    <!-- 重新开始按钮 -->
+    <button class="restart-btn" bindtap="restartGame">重新开始</button>
+  </view>
+  <view class="decor-bottom"></view>
+</view>

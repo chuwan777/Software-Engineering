@@ -1,0 +1,77 @@
+<!-- pages/profile/poems.wxml -->
+<view class="poems-container">
+  <!-- 批量管理工具栏 -->
+  <view wx:if="{{isBatchMode}}" class="batch-toolbar">
+    <view class="batch-select-all" bindtap="toggleSelectAll">
+      <view class="checkbox {{allSelected ? 'checked' : ''}}">
+        <text wx:if="{{allSelected}}" class="checkbox-icon">✓</text>
+      </view>
+      <text class="select-all-text">全选</text>
+    </view>
+    <view class="batch-info">已选择 {{selectedPoems.length}} 项</view>
+    <button class="batch-delete-btn" type="warn" bindtap="batchDeletePoems">批量删除</button>
+  </view>
+
+  <!-- 搜索和分类筛选栏 -->
+  <view class="search-filter-bar">
+    <view class="search-box">
+      <input type="text" placeholder="搜索诗歌" bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <view class="search-actions">
+        <button bindtap="clearSearch" class="clear-btn" wx:if="{{searchKeyword}}">×</button>
+        <button bindtap="onSearch" class="search-btn">搜索</button>
+      </view>
+    </view>
+    <view class="category-filter">
+      <picker bindchange="onCategoryChange" value="{{selectedCategory}}" range="{{categories}}" range-key="name">
+        <view class="picker">
+          {{selectedCategory ? categories[selectedCategory].name : '全部分类'}}
+        </view>
+      </picker>
+    </view>
+    <view class="batch-mode-button" bindtap="toggleBatchMode">
+      <text class="batch-icon">{{isBatchMode ? '✓' : '✎'}}</text>
+      <text class="batch-text">{{isBatchMode ? '取消' : '管理'}}</text>
+    </view>
+  </view>
+
+  <!-- 诗歌列表 -->
+  <view class="poems-list" wx:if="{{!isLoading}}">
+    <block wx:if="{{poems.length > 0}}">
+      <view wx:for="{{poems}}" wx:key="id" class="poem-item {{isBatchMode ? 'batch-mode' : ''}}" bindtap="{{isBatchMode ? '' : 'goToPoemDetail'}}" data-id="{{item.id}}">
+        <!-- 批量选择框 -->
+        <view wx:if="{{isBatchMode}}" class="poem-select-box" bindtap="toggleSelectPoem" data-id="{{item.id}}">
+          <view class="checkbox {{selectedPoems.includes(item.id) ? 'checked' : ''}}">
+            <text wx:if="{{selectedPoems.includes(item.id)}}" class="checkbox-icon">✓</text>
+          </view>
+        </view>
+        <view class="poem-header">
+          <text class="poem-title">{{item.title}}</text>
+          <text class="poem-category">{{item.category}}</text>
+        </view>
+        <text class="poem-content">{{item.content}}</text>
+        <view class="poem-meta">
+          <text class="poem-date">{{item.createdAt}}</text>
+          <text class="poem-tags" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}} </text>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空数据提示 -->
+    <view class="empty-tip" wx:else>
+      <text>{{searchKeyword ? '未找到相关诗歌' : type === 'collection' ? '收藏喜欢的诗歌到这里' : '您还没有添加诗歌作品'}}</text>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading-tip" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 加载更多提示 -->
+  <view class="load-more-tip" wx:if="{{!isLoading && hasMore && poems.length > 0}}">
+    <text>上拉加载更多</text>
+  </view>
+
+  <!-- 添加按钮（仅在我的作品页面显示） -->
+  <button class="add-btn" bindtap="showAddModal" wx:if="{{type === 'my'}}">+ 添加新作品</button>
+</view>

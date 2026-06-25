@@ -1,0 +1,28 @@
+<!-- pages/profile/poem-detail.wxml -->
+<view class="poem-detail-container">
+  <!-- 加载中提示 -->
+  <view class="loading-tip" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 诗歌详情内容 -->
+  <view class="poem-content" wx:else>
+    <view class="poem-header">
+      <text class="poem-title">{{poem.title}}</text>
+      <text class="poem-category">{{poem.category}}</text>
+    </view>
+    
+    <text class="poem-body">{{poem.content}}</text>
+    
+    <view class="poem-meta">
+      <text class="poem-date">创作日期: {{poem.createdAt}}</text>
+      <text class="poem-tags" wx:if="{{poem.tags && poem.tags.length > 0}}">标签: {{poem.tags.join(', ')}}</text>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="edit-btn" bindtap="editPoem">编辑</button>
+      <button class="delete-btn" bindtap="deletePoem">删除</button>
+    </view>
+  </view>
+</view>

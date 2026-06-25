@@ -1,0 +1,275 @@
+<!--index.wxml-->
+<page-meta>
+  <navigation-bar 
+    title="首页" 
+  />
+</page-meta>
+
+<view class="container" animation="{{pageAnimation}}">
+  <!-- 欢迎区域 - 修改为轮播图 -->
+<!-- 轮播图部分修正 -->
+<view class="hero-carousel">
+  <swiper 
+    autoplay 
+    interval="5000" 
+    circular 
+    indicator-dots 
+    indicator-color="rgba(255,255,255,0.5)"
+    indicator-active-color="#fff"
+    style="height: 300px;"
+  >
+    <!-- 轮播项1 -->
+    <swiper-item>
+      <view class="hero-slide">
+        <image 
+          class="slide-image" 
+          src="https://picsum.photos/id/1060/1200/800" 
+          mode="cover"
+        ></image>
+        <!-- 修正类名：hero-content → slide-content -->
+        <view class="slide-content">
+          <text class="welcome-text">品味经典 · 传承文化</text>
+          <text class="slogan">腹有诗书气自华</text>
+        </view>
+      </view>
+    </swiper-item>
+    
+    <!-- 轮播项2 -->
+    <swiper-item>
+      <view class="hero-slide">
+        <image 
+          class="slide-image" 
+          src="https://picsum.photos/id/1054/1200/800" 
+          mode="cover"
+        ></image>
+        <!-- 修正类名：hero-content → slide-content -->
+        <view class="slide-content">
+          <text class="welcome-text">诗言志 · 歌咏言</text>
+          <text class="slogan">感受千年文字之美</text>
+        </view>
+      </view>
+    </swiper-item>
+    
+    <!-- 轮播项3 -->
+    <swiper-item>
+      <view class="hero-slide">
+        <image 
+          class="slide-image" 
+          src="https://picsum.photos/id/1056/1200/800" 
+          mode="cover"
+        ></image>
+        <!-- 修正类名：hero-content → slide-content -->
+        <view class="slide-content">
+          <text class="welcome-text">与古人对话 · 悟人生智慧</text>
+          <text class="slogan">每首诗都有故事</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  
+  <!-- 向下滑动提示 -->
+  <view class="scroll-indicator">
+    <text>向下滑动探索</text>
+    <view class="indicator-dot"></view>
+  </view>
+</view>
+
+  <!-- 主内容区 -->
+  <view class="main-content">
+    <!-- 新增：搜索框 -->
+    <view class="search-bar" animation="{{searchAnimation}}" bindfocus="onSearchFocus" bindblur="onSearchBlur">
+  <input 
+    class="search-input" 
+    placeholder="搜索诗词、作者..." 
+    value="{{searchValue}}"
+    bindinput="handleSearchInput"
+  />
+  <view class="search-icon">
+    <icon 
+      type="{{searchValue ? 'clear' : 'search'}}" 
+      size="16" 
+      color="#999"
+      bindtap="{{searchValue ? 'clearSearch' : ''}}"
+    />
+  </view>
+</view>
+
+<!-- 搜索结果展示 -->
+<view class="search-results" wx:if="{{searchValue && filteredPoems.length > 0}}">
+  <text class="results-title">找到 {{filteredPoems.length}} 个结果</text>
+  <view 
+    class="poem-item" 
+    wx:for="{{filteredPoems}}" 
+    wx:key="id" 
+    bindtap="goToPoemDetail" 
+    data-id="{{item.id}}"
+  >
+    <view class="poem-item-content">
+      <text class="poem-item-title">{{item.title}}</text>
+      <text class="poem-item-author">{{item.dynasty}} · {{item.author}}</text>
+      <text class="poem-item-brief">{{item.content.substring(0, 30)}}...</text>
+    </view>
+    <view class="poem-item-arrow">→</view>
+  </view>
+</view>
+
+<view class="no-results" wx:if="{{searchValue && filteredPoems.length === 0}}">
+  <text>没有找到相关诗词</text>
+</view>
+
+    <!-- 分类导航 - 增强视觉效果 -->
+    <view class="section">
+      <text class="section-title">诗词分类</text>
+      <scroll-view scroll-x class="category-scroll" shows-scrollbar="false">
+        <view class="category-list">
+          <view class="category-item" bindtap="goToCategory" data-type="tang" hover-class="category-item-hover">
+            <view class="category-circle tang">
+              <text class="category-icon">唐</text>
+            </view>
+            <text class="category-name">唐诗</text>
+          </view>
+          <view class="category-item" bindtap="goToCategory" data-type="song" hover-class="category-item-hover">
+            <view class="category-circle song">
+              <text class="category-icon">宋</text>
+            </view>
+            <text class="category-name">宋词</text>
+          </view>
+          <view class="category-item" bindtap="goToCategory" data-type="yuan" hover-class="category-item-hover">
+            <view class="category-circle yuan">
+              <text class="category-icon">元</text>
+            </view>
+            <text class="category-name">元曲</text>
+          </view>
+          <view class="category-item" bindtap="goToCategory" data-type="shijing" hover-class="category-item-hover">
+            <view class="category-circle shijing">
+              <text class="category-icon">诗</text>
+            </view>
+            <text class="category-name">诗经</text>
+          </view>
+          <view class="category-item" bindtap="goToCategory" data-type="more" hover-class="category-item-hover">
+            <view class="category-circle more">
+              <text class="category-icon">+</text>
+            </view>
+            <text class="category-name">更多</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 热门推荐 - 增强卡片设计 -->
+    <view class="section">
+      <text class="section-title">🔥 热门推荐</text>
+      <view class="recommend-card" bindtap="goToPoemDetail" data-id="{{hotPoem.id}}">
+        <view class="card-badge">编辑精选</view>
+        <view class="card-header">
+          <text class="recommend-author">{{hotPoem.dynasty}} · {{hotPoem.author}}</text>
+        </view>
+        <text class="recommend-title">{{hotPoem.title}}</text>
+        <text class="recommend-content">{{hotPoem.content.substring(0, 70)}}...</text>
+        <view class="card-footer">
+          <text class="read-more">阅读全文 →</text>
+          <view class="card-actions">
+            <view class="action-item">
+              <icon type="like" size="14" color="#999"/>
+              <text class="action-text">{{hotPoem.likes || 0}}</text>
+            </view>
+            <view class="action-item">
+              <icon type="comment" size="14" color="#999"/>
+              <text class="action-text">{{hotPoem.comments || 0}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+   <!-- 学习进度区域 -->
+<view class="section">
+  <text class="section-title">📈 学习进度</text>
+  
+  <!-- 未登录状态 -->
+  <view wx:if="{{!isLogin && !isLoading}}" class="progress-loading" style="padding: 30px 20px;">
+    <text style="margin-bottom: 15px; display: block;">登录后可查看您的学习数据</text>
+    <button 
+      bindtap="handleLogin" 
+      style="background-color: #d4a066; color: white; border-radius: 20px; padding: 8px 20px;"
+    >
+      立即登录
+    </button>
+  </view>
+
+  <!-- 已登录且加载完成 -->
+  <view wx:if="{{isLogin && userStats && !isLoading}}" class="progress-card">
+    <view class="progress-item">
+      <text class="progress-label">已学诗词</text>
+      <text class="progress-value">{{userStats.learned}}</text>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{userStats.learnedPercent + '%'}};"></view>
+      </view>
+    </view>
+    <view class="progress-item">
+      <text class="progress-label">连续学习</text>
+      <text class="progress-value">{{userStats.streak}}天</text>
+      <view class="streak-icon">🔥</view>
+    </view>
+    <view class="progress-item">
+      <text class="progress-label">掌握率</text>
+      <text class="progress-value">{{userStats.mastery}}</text>
+      <view class="mastery-circle" style="--progress: {{userStats.masteryPercent + '%'}};"></view>
+    </view>
+  </view>
+  <!-- 加载中状态 -->
+  <view wx:if="{{isLogin && isLoading}}" class="progress-loading">
+    <text>加载学习数据中...</text>
+  </view>
+</view>
+
+    <!-- 诗词列表区域 - 优化卡片和加载效果 -->
+    <view class="section">
+      <text class="section-title">📜 诗词精选</text>
+      
+      <!-- 优化骨架屏 -->
+      <view wx:if="{{isLoading}}" class="skeleton-container">
+        <view class="skeleton-card" wx:for="{{[1,2,3]}}" wx:key="*this">
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+          <view class="skeleton-line"></view>
+        </view>
+      </view>
+      
+      <!-- 诗词列表 - 增强卡片设计 -->
+      <block wx:else>
+        <view 
+          class="poem-item" 
+          wx:for="{{poemList}}" 
+          wx:key="id" 
+          bindtap="goToPoemDetail" 
+          data-id="{{item.id}}"
+          hover-class="poem-item-hover"
+        >
+          <view class="poem-item-badge" wx:if="item.dynasty === '唐'">唐</view>
+          <view class="poem-item-badge song" wx:elif="item.dynasty === '宋'">宋</view>
+          <view class="poem-item-content">
+            <text class="poem-item-title">{{item.title}}</text>
+            <text class="poem-item-author">{{item.dynasty}} · {{item.author}}</text>
+            <text class="poem-item-brief">{{item.content.substring(0, 30)}}...</text>
+          </view>
+          <view class="poem-item-arrow">→</view>
+        </view>
+      </block>
+      
+      <!-- 加载失败提示 -->
+      <view wx:if="{{loadFailed && !isLoading}}" class="load-failed">
+        <text>加载失败，请点击重试</text>
+        <button bindtap="retryLoadData" size="mini" class="retry-button">重试</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 返回顶部按钮 - 美化 -->
+  <view 
+    class="back-to-top {{showBackToTop ? 'show' : ''}}"
+    bindtap="scrollToTop"
+  >
+  <icon type="arrowup" size="18" color="white"/>
+  </view>
+</view>

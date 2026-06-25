@@ -1,0 +1,80 @@
+<!-- 学习进度详情页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{ isLoading }}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 学习进度概览 -->
+  <view class="progress-overview" wx:if="{{ !isLoading }}">
+    <view class="overview-card">
+      <view class="overview-item">
+        <view class="item-value">{{ studyProgress.learned || 0 }}</view>
+        <view class="item-label">已学诗歌</view>
+      </view>
+      <view class="overview-item">
+        <view class="item-value">{{ studyProgress.streakDays || 0 }}</view>
+        <view class="item-label">连续学习</view>
+      </view>
+      <view class="overview-item">
+        <view class="item-value">{{ studyProgress.poemsRecited || 0 }}</view>
+        <view class="item-label">已背诵</view>
+      </view>
+      <view class="overview-item">
+        <view class="item-value">{{ studyProgress.totalDays || 0 }}</view>
+        <view class="item-label">总学习天数</view>
+      </view>
+    </view>
+
+    <!-- 学习进度图表 -->
+    <view class="progress-chart">
+      <view class="chart-title">学习完成度</view>
+      <view class="chart-container">
+        <view class="circular-progress" style="background: conic-gradient(#FF8C00 {{ (studyProgress.percentage || 0) }}%, #FFE8B8 0%);">
+          <view class="progress-text">{{ studyProgress.percentage || 0 }}%</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日学习目标 -->
+  <view class="daily-goal" wx:if="{{ !isLoading }}">
+    <view class="goal-header">
+      <text class="goal-title">今日学习目标</text>
+      <text class="goal-status">{{ studyProgress.goalCompleted ? '✓ 已完成' : '进行中' }}</text>
+    </view>
+    <view class="progress-bar goal-progress">
+      <view class="progress-value" style="width: {{ (studyProgress.completionRate || 0) + '%' }}"></view>
+    </view>
+    <view class="goal-info">
+      <text>{{ studyProgress.dailyCompleted || 0 }} / {{ studyProgress.dailyGoal || 1 }} 首</text>
+    </view>
+  </view>
+
+  <!-- 学习历史记录 -->
+  <view class="learning-history" wx:if="{{ !isLoading }}">
+    <view class="history-header">
+      <text class="history-title">学习历史</text>
+      <text class="history-count">{{ learningHistory.length }} 条记录</text>
+    </view>
+    
+    <view class="history-list">
+      <view class="history-item" wx:for="{{ learningHistory }}" wx:key="index" bindtap="goToPoemDetail" data-id="{{ item.id }}">
+        <view class="history-content">
+          <text class="poem-title">{{ item.title || '未知诗歌' }}</text>
+          <text class="poem-author">{{ item.author || '' }}</text>
+        </view>
+        <view class="history-info">
+          <text class="study-time">{{ item.date || '时间未知' }}</text>
+          <text class="study-status">已学习</text>
+        </view>
+      </view>
+      
+      <view class="empty-state" wx:if="{{ learningHistory.length === 0 }}">
+        <text>暂无学习记录</text>
+        <text class="empty-tip">开始学习第一首古诗吧</text>
+      </view>
+    </view>
+  </view>
+</view>

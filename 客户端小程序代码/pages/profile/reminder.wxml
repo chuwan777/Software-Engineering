@@ -1,0 +1,115 @@
+<!-- reminder.wxml -->
+<view class="reminder-container">
+  <!-- 提醒开关 -->
+  <view class="reminder-section">
+    <view class="section-title">学习提醒</view>
+    <view class="section-content">
+      <view class="toggle-item">
+        <text class="toggle-label">启用每日学习提醒</text>
+        <switch 
+          checked="{{isReminderEnabled}}" 
+          bindchange="toggleReminder"
+          color="#007aff"
+        ></switch>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提醒时间 -->
+  <view class="reminder-section" wx:if="{{isReminderEnabled}}">
+    <view class="section-title">提醒时间</view>
+    <view class="section-content">
+      <picker 
+        mode="time" 
+        value="{{reminderTime}}" 
+        bindchange="bindTimeChange"
+        class="time-picker"
+      >
+        <view class="picker-content">
+          <text class="picker-label">选择提醒时间：</text>
+          <text class="picker-value">{{reminderTime}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 提醒频率 -->
+  <view class="reminder-section" wx:if="{{isReminderEnabled}}">
+    <view class="section-title">提醒频率</view>
+    <view class="section-content">
+      <view class="frequency-container">
+        <view 
+          wx:for="{{reminderFrequency}}" 
+          wx:key="index"
+          class="frequency-item {{selectedFrequency.includes(item) ? 'selected' : ''}}"
+          bindtap="selectFrequency"
+          data-day="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提醒内容 -->
+  <view class="reminder-section" wx:if="{{isReminderEnabled}}">
+    <view class="section-title">提醒内容</view>
+    <view class="section-content">
+      <view class="content-options">
+        <view 
+          class="content-option {{reminderContent === '该开始今天的古诗学习啦！' ? 'selected' : ''}}"
+          bindtap="selectReminderContent"
+          data-content="该开始今天的古诗学习啦！"
+        >
+          该开始今天的古诗学习啦！
+        </view>
+        <view 
+          class="content-option {{reminderContent === '坚持学习，每天进步一点点！' ? 'selected' : ''}}"
+          bindtap="selectReminderContent"
+          data-content="坚持学习，每天进步一点点！"
+        >
+          坚持学习，每天进步一点点！
+        </view>
+        <view 
+          class="content-option {{reminderContent === '今天也要认真学习古诗哦！' ? 'selected' : ''}}"
+          bindtap="selectReminderContent"
+          data-content="今天也要认真学习古诗哦！"
+        >
+          今天也要认真学习古诗哦！
+        </view>
+      </view>
+
+      <!-- 自定义提醒内容 -->
+      <view class="custom-content">
+        <view class="custom-title">自定义提醒内容</view>
+        <view class="custom-input-container">
+          <input 
+            class="custom-input"
+            placeholder="请输入自定义提醒内容"
+            value="{{customContent}}"
+            bindinput="inputCustomContent"
+            maxlength="50"
+          ></input>
+          <button 
+            class="save-btn"
+            bindtap="saveCustomContent"
+            disabled="{{!customContent.trim()}}"
+          >
+            保存
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前设置预览 -->
+  <view class="reminder-preview" wx:if="{{isReminderEnabled}}">
+    <view class="preview-title">当前设置预览</view>
+    <view class="preview-content">
+      <text>每天 {{reminderTime}} 提醒您：{{reminderContent}}</text>
+      <view class="preview-frequency" wx:if="{{selectedFrequency.length > 0}}">
+        提醒频率：{{selectedFrequency.join('、')}}
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,44 @@
+<!-- settings.wxml -->
+<view class="settings-container">
+  <!-- 用户信息卡片 -->
+  <view class="user-info-card">
+    <image class="avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+    <view class="user-details">
+      <view class="username">{{userInfo.name}}</view>
+      <view class="user-level">LV1 入门学者</view>
+    </view>
+  </view>
+
+  <!-- 设置列表 -->
+  <view class="settings-list">
+    <block wx:for="{{settings}}" wx:key="id">
+      <view class="setting-section">
+        <view class="section-header">
+          <text class="section-icon">{{item.icon}}</text>
+          <text class="section-title">{{item.title}}</text>
+        </view>
+        <view class="section-content">
+          <view 
+            wx:for="{{item.items}}" 
+            wx:for-item="subItem"
+            wx:key="name"
+            class="setting-item"
+            bindtap="onSettingItemClick"
+            data-url="{{subItem.url}}"
+          >
+            <text class="item-name">{{subItem.name}}</text>
+            <view class="item-right">
+              <text wx:if="{{subItem.value}}" class="item-value">{{subItem.value}}</text>
+              <text class="item-arrow">></text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+</view>

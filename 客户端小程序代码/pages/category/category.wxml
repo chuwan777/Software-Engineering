@@ -1,0 +1,109 @@
+<!--pages/category/category.wxml-->
+<!-- pages/category/category.wxml -->
+<page-meta>
+  <navigation-bar 
+    title="{{categoryName}}" 
+    backgroundTextStyle="dark"
+  />
+</page-meta>
+
+<view class="container">
+  <!-- 搜索框（复用首页样式，支持分类内搜索） -->
+  <view class="search-bar">
+    <input 
+      class="search-input" 
+      placeholder="搜索本分类诗词、作者..." 
+      value="{{searchValue}}"
+      bindinput="handleSearchInput"
+    />
+    <view class="search-icon">
+      <icon 
+        type="{{searchValue ? 'clear' : 'search'}}" 
+        size="16" 
+        color="#999"
+        bindtap="{{searchValue ? 'clearSearch' : ''}}"
+      />
+    </view>
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="main-content">
+    <!-- 分类标题与统计 -->
+    <view class="category-header">
+      <text class="category-title">{{categoryName}}</text>
+      <text class="category-count">共 {{totalPoems}} 首</text>
+    </view>
+
+    <!-- 搜索结果展示 -->
+    <view class="search-results" wx:if="{{searchValue && filteredPoems.length > 0}}">
+      <text class="results-title">找到 {{filteredPoems.length}} 个结果</text>
+      <view 
+        class="poem-item" 
+        wx:for="{{filteredPoems}}" 
+        wx:key="id" 
+        bindtap="goToPoemDetail" 
+        data-id="{{item.id}}"
+      >
+        <view class="poem-item-content">
+          <text class="poem-item-title">{{item.title}}</text>
+          <text class="poem-item-author">{{item.dynasty}} · {{item.author}}</text>
+          <text class="poem-item-brief">{{item.content.substring(0, 30)}}...</text>
+        </view>
+        <view class="poem-item-arrow">→</view>
+      </view>
+    </view>
+
+    <view class="no-results" wx:if="{{searchValue && filteredPoems.length === 0}}">
+      <text>没有找到相关诗词</text>
+    </view>
+
+    <!-- 诗词列表区域 -->
+    <view class="section" wx:if="{{!searchValue}}">
+      <!-- 骨架屏（加载状态） -->
+      <view wx:if="{{isLoading}}" class="skeleton-container">
+        <view class="skeleton-card" wx:for="{{[1,2,3]}}" wx:key="*this">
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+          <view class="skeleton-line"></view>
+        </view>
+      </view>
+      
+      <!-- 诗词列表 -->
+      <block wx:else>
+        <view 
+          class="poem-item" 
+          wx:for="{{poemList}}" 
+          wx:key="id" 
+          bindtap="goToPoemDetail" 
+          data-id="{{item.id}}"
+        >
+          <view class="poem-item-content">
+            <text class="poem-item-title">{{item.title}}</text>
+            <text class="poem-item-author">{{item.dynasty}} · {{item.author}}</text>
+            <text class="poem-item-brief">{{item.content.substring(0, 30)}}...</text>
+          </view>
+          <view class="poem-item-arrow">→</view>
+        </view>
+      </block>
+      
+      <!-- 加载失败提示 -->
+      <view wx:if="{{loadFailed && !isLoading}}" class="load-failed">
+        <text>加载失败，请点击重试</text>
+        <button bindtap="retryLoadData" size="mini" class="retry-button">重试</button>
+      </view>
+
+      <!-- 没有更多数据提示 -->
+      <view wx:if="{{!hasMoreData && !isLoading && poemList.length > 0 && !searchValue}}" class="no-more">
+        <text>已经到底啦</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 返回顶部按钮 -->
+  <view 
+    class="back-to-top {{showBackTop ? 'show' : ''}}"
+    bindtap="scrollToTop"
+  >
+  <icon type="arrowup" size="18" color="white"/>
+  </view>
+</view>

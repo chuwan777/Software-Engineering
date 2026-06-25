@@ -1,0 +1,48 @@
+<!-- pages/profile/recording-detail.wxml -->
+<view class="recording-detail-container">
+  <!-- 加载中状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 录音详情卡片 -->
+  <view class="recording-card" wx:if="{{!isLoading && recording}}">
+    <!-- 录音标题和时长 -->
+    <view class="recording-header">
+      <text class="recording-title">{{recording.name}}</text>
+      <text class="recording-duration">{{formatDuration(recording.duration)}}</text>
+    </view>
+
+    <!-- 录音信息 -->
+    <view class="recording-info">
+      <view class="info-item">
+        <text class="info-label">录音时间</text>
+        <text class="info-value">{{recording.recordedAt}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">文件大小</text>
+        <text class="info-value">{{recording.size || '未知'}}</text>
+      </view>
+    </view>
+
+    <!-- 播放控件 -->
+    <view class="playback-control">
+      <view class="play-button" bindtap="togglePlay">
+        <text class="play-icon">{{isPlaying ? '⏸️' : '▶️'}}</text>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <view class="action-item" bindtap="handleShare">
+        <text class="action-icon">🔗</text>
+        <text class="action-text">分享</text>
+      </view>
+      <view class="action-item" bindtap="deleteRecording">
+        <text class="action-icon">🗑️</text>
+        <text class="action-text">删除</text>
+      </view>
+    </view>
+  </view>
+</view>

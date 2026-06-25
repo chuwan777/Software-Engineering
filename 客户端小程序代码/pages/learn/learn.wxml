@@ -1,0 +1,105 @@
+<!--pages/learn/learn.wxml-->
+<view class="poem-container">
+  <!-- 加载中状态 -->
+  <view wx:if="{{isLoading}}" class="loading-container">
+    <text>古诗加载中...</text>
+  </view>
+  
+  <!-- 加载失败状态 -->
+  <view wx:if="{{loadFailed && !isLoading}}" class="load-failed">
+    <text>加载失败，请点击重试</text>
+    <button bindtap="retryLoadData" size="mini" class="retry-button btn btn-primary">重试</button>
+  </view>
+  
+  <!-- 为每一首诗创建一个卡片 -->
+  <view class="poem-card" wx:for="{{ poemList }}" wx:for-index="index" wx:key="id" bindtap="goToPoemDetail" data-id="{{item.id}}" data-index="{{index}}" hover-class="poem-card-hover">
+    <!-- 诗歌图片 -->
+    <image class="poem-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+    
+    <!-- 朝代徽章 -->
+    <view class="poem-dynasty-badge {{item.dynasty === '唐' ? 'tang' : item.dynasty === '宋' ? 'song' : 'other'}}">
+      {{ item.dynasty }}
+    </view>
+    
+    <!-- 内容区域 -->
+    <view class="poem-content">
+      <!-- 标题 -->
+      <text class="poem-title">{{ item.title }}</text>
+
+      <!-- 作者与朝代 -->
+      <view class="poem-meta">
+        <text class="poem-author">{{ item.dynasty }} · {{ item.author || '佚名' }}</text>
+        <text class="poem-rating" wx:if="item.rating">
+          {{ item.rating }}
+        </text>
+      </view>
+
+      <!-- 原文 -->
+      <view class="poem-text">
+        <text>{{ item.content }}</text>
+      </view>
+    </view>
+    
+    <!-- 查看详情箭头 -->
+    <view class="poem-card-arrow">→</view>
+  </view>
+  
+  <!-- 空数据状态 -->
+  <view wx:if="{{!isLoading && !loadFailed && poemList.length === 0}}" class="empty-data">
+    <text>暂无古诗数据</text>
+  </view>
+  
+  <!-- 返回顶部按钮 -->
+  <view class="back-to-top {{showBackToTop ? 'show' : ''}}" bindtap="scrollToTop">
+    <text class="back-to-top-icon">↑</text>
+  </view>
+
+  <!-- AI小助手悬浮按钮 -->
+  <view class="ai-assistant-button {{showAiChat ? 'hide' : ''}}" bindtap="toggleAiChat">
+    <text class="ai-assistant-icon">🤖</text>
+  </view>
+
+  <!-- AI小助手聊天界面 -->
+  <view class="ai-chat-container {{showAiChat ? 'show' : ''}}">
+    <!-- 聊天头部 -->
+    <view class="ai-chat-header">
+      <view class="ai-chat-title">
+        <text class="ai-title-icon">🤖</text>
+        <text class="ai-title-text">古诗AI小助手</text>
+      </view>
+      <view class="ai-chat-header-right">
+        <view class="ai-chat-clear" bindtap="clearChatHistory">清除</view>
+        <view class="ai-chat-close" bindtap="toggleAiChat">×</view>
+      </view>
+    </view>
+
+    <!-- 聊天消息列表 -->
+    <scroll-view class="ai-chat-messages" scroll-y="true" scroll-into-view="{{lastMessageId}}" enable-flex="true">
+      <!-- 系统欢迎消息 -->
+      <view class="ai-message ai-assistant-message" wx:if="messages.length === 0">
+        <text class="ai-message-content">你好！我是古诗AI小助手，有什么可以帮助你的吗？可以问我关于古诗的问题哦~</text>
+      </view>
+
+      <!-- 聊天消息 -->
+      <view wx:for="{{messages}}" wx:key="id" class="ai-message {{item.type === 'user' ? 'ai-user-message' : 'ai-assistant-message'}}">
+        <view class="ai-message-bubble {{item.type === 'user' ? 'user-bubble' : 'assistant-bubble'}}">
+          <text class="ai-message-content">{{item.content}}</text>
+          <text class="ai-message-time">{{item.formattedTime}}</text>
+        </view>
+      </view>
+
+      <!-- 加载中状态 -->
+      <view wx:if="isAiLoading" class="ai-loading">
+        <text class="ai-loading-text">AI正在思考中...</text>
+      </view>
+    </scroll-view>
+
+    <!-- 聊天输入框 -->
+    <view class="ai-chat-input-container">
+      <input class="ai-chat-input" placeholder="请输入你的问题..." value="{{userInput}}" bindinput="onInputChange" bindconfirm="sendMessage" />
+      <button class="ai-chat-send-btn" bindtap="sendMessage" disabled="{{!userInput.trim() || isAiLoading}}">
+        <text class="ai-send-icon">发送</text>
+      </button>
+    </view>
+  </view>
+</view>

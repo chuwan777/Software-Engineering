@@ -1,0 +1,242 @@
+/* pages/profile/recordings.wxss */
+.recordings-container {
+  background-color: #f5f7fa;
+  color: #333;
+  padding-bottom: 60rpx;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
+  display: block;
+}
+
+/* 录音控制区域 */
+.recording-control {
+  background: linear-gradient(135deg, #f06292, #e91e63);
+  color: white;
+  padding: 60rpx 40rpx;
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(233, 30, 99, 0.3);
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.recording-info {
+  margin-bottom: 40rpx;
+}
+
+.recording-time {
+  font-size: 64rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20rpx;
+  animation: pulse 1s infinite;
+}
+
+.recording-status {
+  font-size: 32rpx;
+  opacity: 0.9;
+}
+
+.recording-instruction {
+  font-size: 32rpx;
+  opacity: 0.9;
+}
+
+.record-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.record-btn {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background-color: white;
+  color: #e91e63;
+  border: none;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.record-btn.recording {
+  background-color: #ff5252;
+  color: white;
+  animation: recording 1s infinite;
+}
+
+@keyframes recording {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20rpx rgba(255, 82, 82, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+}
+
+/* 标题 */
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 0 0 30rpx 30rpx;
+  padding-left: 20rpx;
+  border-left: 8rpx solid #e91e63;
+  color: #e91e63;
+}
+
+/* 录音列表 */
+.recordings-list {
+  padding: 0 30rpx;
+}
+
+.recording-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.recording-item:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+.recording-content {
+  flex: 1;
+  margin-right: 30rpx;
+}
+
+.recording-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.recording-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recording-duration {
+  font-size: 28rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.recording-meta {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.recording-time {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.recording-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-btn, .delete-btn {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  border: none;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  transition: all 0.3s ease;
+}
+
+.play-btn:last-child, .delete-btn:last-child {
+  margin-bottom: 0;
+}
+
+.play-btn {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.play-btn:active {
+  transform: scale(0.9);
+}
+
+.play-btn.playing {
+  background-color: #4caf50;
+  color: white;
+  animation: playing 1s infinite;
+}
+
+@keyframes playing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.delete-btn {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.delete-btn:active {
+  transform: scale(0.9);
+}
+
+/* 空数据提示 */
+.empty-tip {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  color: #999;
+}
+
+.empty-tip text:first-child {
+  font-size: 32rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-instruction {
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+/* 加载提示 */
+.loading-tip {
+  text-align: center;
+  padding: 40rpx;
+  color: #999;
+  font-size: 28rpx;
+}

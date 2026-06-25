@@ -1,0 +1,95 @@
+<!--pages/park/connect-words.wxml-->
+<view class="page-container">
+  <view class="decor-top"></view>
+  <view class="main-container">
+    <view class="title-box">
+      <view class="title-decoration left"></view>
+      <text class="game-title">连字成诗</text>
+      <view class="title-decoration right"></view>
+    </view>
+
+    <!-- 状态信息栏 -->
+    <view class="status-bar" wx:if="{{!isLoading}}">
+      <view class="status-item">
+        <text>用时：{{usedTime}}秒</text>
+      </view>
+      <view class="status-item">
+        <text>得分：{{score}}</text>
+      </view>
+      <view class="status-item" wx:if="{{consecutiveCorrect > 1}}">
+        <text class="streak">连续答对：{{consecutiveCorrect}} 次</text>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{isLoading}}">加载中...</view>
+
+    <!-- 错误状态 -->
+    <view class="error-box" wx:if="{{hasError}}">
+      <text class="error-msg">{{errorMsg}}</text>
+      <button class="retry-btn" bindtap="initGame">重新加载</button>
+    </view>
+
+    <!-- 游戏区域 -->
+    <view wx:if="{{!isLoading && !hasError && !isAnswered}}" class="fade-in">
+      <!-- 提示信息 -->
+      <text class="hint heartbeat">请将下方汉字按顺序组成诗句：</text>
+      
+      <!-- 诗句信息 -->
+      <view class="poem-info fade-in" wx:if="{{currentPoem}}">
+        <text class="author">{{currentPoem.author}} · {{currentPoem.title}}</text>
+      </view>
+      
+      <!-- 已选序列 -->
+      <view class="selected-words">
+        <view class="word-item bounce" wx:for="{{selectedWords}}" wx:key="index">
+          {{item}}
+          <view class="delete" bindtap="removeWord" data-index="{{index}}">×</view>
+        </view>
+      </view>
+
+      <!-- 提示按钮 -->
+      <button class="hint-btn heartbeat" bindtap="showHint">
+        提示（剩余{{maxHints - hintCount}}次）
+      </button>
+
+      <!-- 候选字池 -->
+      <view class="word-pool">
+        <view class="word-btn scale-in" 
+              wx:for="{{candidateWords}}" 
+              wx:key="index"
+              bindtap="selectWord" 
+              data-index="{{index}}"
+              wx:if="{{!usedIndices.includes(index)}}"
+              hover-class="word-btn-active">
+          {{item}}
+        </view>
+      </view>
+
+      <!-- 提交按钮 -->
+      <button class="submit-btn" bindtap="submitAnswer" hover-class="submit-btn-active">
+        提交诗句
+      </button>
+    </view>
+
+    <!-- 结果区域 -->
+    <view class="result-card scale-in" wx:if="{{isAnswered}}">
+      <text class="correct-result bounce" wx:if="{{isCorrect}}">恭喜，组成了正确的诗句！</text>
+      <text class="wrong-result shake" wx:else>答错了，正确诗句是：</text>
+      <text class="correct-poem fade-in">{{correctPoem}}</text>
+      <view class="poem-info fade-in" wx:if="{{currentPoem}}">
+        <text class="author">{{currentPoem.author}} · {{currentPoem.title}}</text>
+      </view>
+      <view class="result-stats fade-in" wx:if="{{isAnswered}}">
+        <text>本次用时：{{usedTime}}秒</text>
+        <text wx:if="{{isCorrect}}">本次得分：+{{score - prevScore}}</text>
+        <text wx:else>本次得分：0</text>
+        <text>总得分：{{score}}</text>
+      </view>
+      <button class="restart-btn" bindtap="restartGame" hover-class="restart-btn-active">
+        再来一局
+      </button>
+    </view>
+  </view>
+  <view class="decor-bottom"></view>
+</view>

@@ -1,0 +1,73 @@
+<!-- pages/profile/recordings.wxml -->
+<view class="recordings-container">
+  <!-- 录音控制区域 -->
+  <view class="recording-control">
+    <view class="recording-info" wx:if="{{isRecording}}">
+      <text class="recording-time">{{formatDuration(recordingTime)}}</text>
+      <text class="recording-status">正在录音...</text>
+    </view>
+    <view class="recording-info" wx:else>
+      <text class="recording-instruction">点击下方按钮开始录音</text>
+    </view>
+    <view class="record-btn-container">
+      <button 
+        class="record-btn {{isRecording ? 'recording' : ''}}"
+        bindtap="{{isRecording ? 'stopRecording' : 'startRecording'}}"
+        disabled="{{isLoading}}"
+      >
+        {{isRecording ? '停止' : '开始录音'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 录音列表 -->
+  <view class="section-title">我的录音</view>
+  <view class="recordings-list" wx:if="{{!isLoading}}">
+    <view 
+      wx:for="{{recordings}}" 
+      wx:key="id"
+      class="recording-item"
+      bindtap="goToRecordingDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="recording-content">
+        <view class="recording-header">
+          <text class="recording-name">{{item.title}}</text>
+          <text class="recording-duration">{{formatDuration(item.duration)}}</text>
+        </view>
+        <view class="recording-meta">
+          <text class="recording-time">{{item.createdAt ? item.createdAt.slice(0, 19).replace('T', ' ') : ''}}</text>
+        </view>
+      </view>
+      <view class="recording-actions">
+        <button 
+          class="play-btn {{isPlaying && currentRecording && currentRecording.id === item.id ? 'playing' : ''}}"
+          bindtap="playRecording"
+          data-id="{{item.id}}"
+          catchtap=""
+        >
+          {{isPlaying && currentRecording && currentRecording.id === item.id ? '⏸️' : '▶️'}}
+        </button>
+        <button 
+          class="delete-btn"
+          bindtap="deleteRecording"
+          data-id="{{item.id}}"
+          catchtap=""
+        >
+          🗑️
+        </button>
+      </view>
+    </view>
+    
+    <!-- 空数据提示 -->
+    <view class="empty-tip" wx:if="{{recordings.length === 0}}">
+      <text>暂无录音作品</text>
+      <text class="empty-instruction">点击下方按钮开始录制您的第一首古诗朗诵</text>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading-tip" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+</view>

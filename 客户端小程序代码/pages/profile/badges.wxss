@@ -1,0 +1,252 @@
+/* 徽章详情页样式 */
+.container {
+  padding: 20rpx;
+  background-color: #FFFDF5;
+  min-height: 100vh;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  color: #999;
+  gap: 20rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #FFE8B8;
+  border-top-color: #FF8C00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 徽章容器 */
+.badges-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-count {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 徽章网格 */
+.badges-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.badge-item {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.badge-item:active {
+  transform: translateY(-5rpx);
+  box-shadow: 0 5rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.badge-icon {
+  font-size: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF9E6;
+  border-radius: 50%;
+}
+
+.badge-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.badge-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.badge-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.badge-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 140, 0, 0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.badge-item:hover .badge-overlay {
+  opacity: 1;
+}
+
+/* 模态框样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 20rpx;
+  width: 600rpx;
+  max-width: 90%;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.2);
+  padding: 30rpx;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: #999;
+  cursor: pointer;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.modal-close:active {
+  background-color: #f0f0f0;
+}
+
+/* 徽章详情 */
+.badge-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.badge-detail-icon {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+}
+
+.badge-detail-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.badge-detail-description {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  line-height: 40rpx;
+  margin: 10rpx 0;
+}
+
+.badge-condition {
+  background-color: #FFF9E6;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  width: 100%;
+  margin: 10rpx 0;
+}
+
+.condition-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #FF8C00;
+}
+
+.condition-content {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.badge-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.empty-tip {
+  font-size: 24rpx;
+  color: #bbb;
+}

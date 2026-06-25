@@ -1,0 +1,97 @@
+/* pages/profile/poem-detail.wxss */
+.poem-detail-container {
+  padding: 30rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.loading-tip {
+  padding: 100rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.poem-content {
+  background-color: white;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  padding: 40rpx;
+}
+
+.poem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.poem-title {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.poem-category {
+  font-size: 26rpx;
+  color: #666;
+  background-color: #f0f0f0;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.poem-body {
+  font-size: 32rpx;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 40rpx;
+  white-space: pre-wrap;
+}
+
+.poem-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  font-size: 26rpx;
+  color: #999;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  margin-bottom: 40rpx;
+}
+
+.poem-date {
+  font-size: 24rpx;
+}
+
+.poem-tags {
+  font-size: 24rpx;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 30rpx;
+}
+
+.edit-btn {
+  flex: 1;
+  height: 90rpx;
+  background-color: #1989fa;
+  color: white;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn {
+  flex: 1;
+  height: 90rpx;
+  background-color: #ee0a24;
+  color: white;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

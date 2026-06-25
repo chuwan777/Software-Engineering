@@ -1,0 +1,720 @@
+/* index.wxss */
+/* 引入 Font Awesome 图标库 */
+
+
+/* 基础与布局 */
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background-color: #f7f5f2; /* 米白色背景，更显典雅 */
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  padding-bottom: 60px; /* 为底部留出空间 */
+  
+}
+
+.main-content {
+  padding: 0 20px;
+  padding-top: 50px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+}
+.section-title::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background-color: #d4a066; /* 暖棕色作为强调色 */
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+/* 欢迎区域 (Hero Section) */
+
+
+.hero-content {
+  animation: fadeInUp 1s ease-out;
+}
+
+.welcome-text {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.slogan {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: 'STKaiti', 'KaiTi', serif; /* 楷体更有韵味 */
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  animation: bounce 2s infinite;
+}
+
+.indicator-dot {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  margin: 8px auto;
+}
+
+/* 搜索栏 */
+.search-bar {
+  background-color: white;
+  border-radius: 30px;
+  padding: 0 15px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  margin: -25px 20px 25px; /* 向上偏移，形成悬浮效果 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 10;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  font-size: 14px;
+  color: #333;
+}
+
+.search-icon {
+  color: #999;
+  font-size: 16px;
+}
+
+/* 分类导航 */
+.category-scroll {
+  white-space: nowrap;
+  margin: 10px 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.category-list {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.category-item {
+  display: inline-block;
+  margin-right: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.category-item:hover,
+.category-item-hover {
+  transform: translateY(-3px);
+}
+
+.category-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.category-circle.tang::before {
+  background: linear-gradient(135deg, #FF6B6B, #FFD166);
+}
+
+.category-circle.song::before {
+  background: linear-gradient(135deg, #06D6A0, #118AB2);
+}
+
+.category-circle.yuan::before {
+  background: linear-gradient(135deg, #8338EC, #3A86FF);
+}
+
+.category-circle.shijing::before {
+  background: linear-gradient(135deg, #F72585, #4CC9F0);
+}
+
+.category-circle.more::before {
+  background: linear-gradient(135deg, #FF9F1C, #2EC4B6);
+}
+
+.category-circle:hover::before {
+  opacity: 1;
+}
+
+.category-icon {
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.category-name {
+  font-size: 14px;
+  color: #555;
+  display: block;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+.category-item:hover .category-name {
+  color: #d4a066;
+}
+
+/* 热门推荐卡片 */
+.recommend-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.recommend-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #d4a066, #e5c5a5);
+}
+
+.recommend-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(212, 160, 102, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.card-header {
+  margin-bottom: 15px;
+}
+
+.recommend-author {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+.recommend-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #2d3748;
+  display: block;
+  line-height: 1.4;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.recommend-content {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.8;
+  display: block;
+  margin-bottom: 20px;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.read-more {
+  font-size: 14px;
+  color: #d4a066;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.recommend-card:hover .read-more {
+  color: #b8860b;
+}
+
+.card-actions {
+  display: flex;
+  gap: 20px;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #999;
+}
+
+.action-text {
+  font-size: 13px;
+  color: #666;
+}
+
+/* 学习进度卡片 */
+.progress-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.progress-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+}
+.progress-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+.progress-bar {
+  width: 80%;
+  height: 6px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background-color: #d4a066;
+  border-radius: 3px;
+  transition: width 1s ease-in-out;
+}
+.streak-icon {
+  font-size: 20px;
+  animation: pulse 2s infinite;
+}
+.mastery-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(#d4a066 var(--progress, 0%), #f0f0f0 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.mastery-circle::before {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* 诗词列表 */
+.poem-item {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #d4a066, #e5c5a5);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.poem-item:hover,
+.poem-item-hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.poem-item:hover::before {
+  transform: scaleY(1);
+}
+
+.poem-item-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(212, 160, 102, 0.9);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.poem-item-badge.song {
+  background-color: rgba(6, 214, 160, 0.9);
+}
+
+.poem-item-content {
+  flex: 1;
+  overflow: hidden;
+  padding-right: 50px;
+}
+
+.poem-item-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #2d3748;
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.poem-item:hover .poem-item-title {
+  color: #d4a066;
+}
+
+.poem-item-author {
+  font-size: 13px;
+  color: #999;
+  display: block;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.poem-item-brief {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.poem-item-arrow {
+  font-size: 20px;
+  color: #ccc;
+  margin-left: 12px;
+  font-weight: 300;
+  transition: all 0.3s ease;
+}
+
+.poem-item:hover .poem-item-arrow {
+  color: #d4a066;
+  transform: translateX(5px);
+}
+
+/* 骨架屏 */
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.skeleton-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.skeleton-line {
+  height: 1em;
+  background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.skeleton-line.short {
+  width: 60%;
+}
+
+/* 加载失败 */
+.load-failed {
+  text-align: center;
+  padding: 30px 0;
+  color: #999;
+}
+.retry-button {
+  margin-top: 10px;
+  color: #d4a066;
+  border-color: #d4a066;
+}
+.retry-button::after {
+  border-color: transparent transparent transparent #d4a066;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  bottom: 100rpx;
+  right: 40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background-color: rgba(212, 160, 102, 0.9);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(30rpx) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+.back-to-top i {
+  font-size: 36rpx;
+}
+
+/* 动画定义 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-5px) translateX(-50%);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.hero-carousel {
+  position: relative;
+  width: 100%;
+}
+
+swiper {
+  width: 100%;
+  height: 300px; /* 保持原高度 */
+}
+
+.hero-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* 防止图片溢出 */
+}
+
+/* 图片添加绝对定位，填满父容器 */
+.slide-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 确保图片不变形，覆盖整个区域 */
+}
+
+/* 文字容器样式（原.slide-content 已匹配 WXML） */
+.slide-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 半透明背景，提升文字可读性 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  animation: fadeInUp 1s ease-out;
+  z-index: 1; /* 确保文字在图片上方 */
+}
+
+/* 文字样式保持不变 */
+.welcome-text {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.slogan {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  animation: bounce 2s infinite;
+  z-index: 2; /* 确保提示在文字层上方 */
+}
+
+/* 补充动画定义（如果之前没写） */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-5px) translateX(-50%);
+  }
+}
+.progress-loading {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+/* 登录按钮样式补充 */
+.progress-loading button {
+  border: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.progress-loading button::after {
+  border: none;
+}
+
+/* 进度条宽度修正（之前漏掉了%符号） */
+.progress-fill {
+  /* 原有样式保持不变 */
+  width: 0%; /* 默认值 */
+}
